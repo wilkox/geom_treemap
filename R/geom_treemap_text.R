@@ -35,6 +35,7 @@
 #' geom arguments as for `ggplot2::geom_text`.
 #' @param fixed Deprecated. Use `layout = "fixed"` instead. Will be removed in
 #' later versions.
+#' @param formatter An optional function to apply to the label aesthetic.
 #'
 #' @seealso geom_treemap
 #'
@@ -78,6 +79,7 @@ geom_treemap_text <- function(
   fixed = NULL,
   layout = "squarified",
   start = "bottomleft",
+  formatter = NULL,
   ...
 ) {
   ggplot2::layer(
@@ -99,6 +101,7 @@ geom_treemap_text <- function(
       fixed = fixed,
       layout = layout,
       start = start,
+      formatter = formatter,
       ...
     )
   )
@@ -136,10 +139,15 @@ GeomTreemapText <- ggplot2::ggproto(
     fixed = NULL,
     layout = "squarified",
     start = "bottomleft",
+    formatter = NULL,
     place = "centre"
   ) {
 
     data <- coord$transform(data, panel_scales)
+
+    if (! is.null(formatter)) {
+      data$label <- formatter(data$label)
+    }
 
     # Generate treemap layout for data
     params <- list(

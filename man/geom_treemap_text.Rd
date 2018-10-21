@@ -9,7 +9,7 @@ geom_treemap_text(mapping = NULL, data = NULL, stat = "identity",
   inherit.aes = TRUE, padding.x = grid::unit(1, "mm"),
   padding.y = grid::unit(1, "mm"), place = "topleft", min.size = 4,
   grow = FALSE, reflow = FALSE, fixed = NULL,
-  layout = "squarified", start = "bottomleft", ...)
+  layout = "squarified", start = "bottomleft", formatter = NULL, ...)
 }
 \arguments{
 \item{mapping, data, stat, position, na.rm, show.legend, inherit.aes, ...}{Standard
@@ -39,6 +39,8 @@ different layout algorithms.}
 
 \item{start}{The corner in which to start placing the tiles. One of
 'bottomleft' (the default), 'topleft', 'topright' or 'bottomright'.}
+
+\item{formatter}{An optional function to apply to the label aesthetic.}
 }
 \description{
 `geom_treemap_text` can be used to add a text label to each tile in a treemap
